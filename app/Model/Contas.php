@@ -15,11 +15,15 @@ class Contas
         $i = 0;
         $query = "select * from Contas";
         $result = mysqli_query($this->conn, $query);
-        while($row = $result->fetch_assoc()) {
-            $ret[$i] = $row;
-            $i++;
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $ret[$i] = $row;
+                $i++;
+            }
+            return $ret;
+        }else {
+            return "Nenhuma conta encotrada.";
         }
-        return $ret;
     }
 
     public function getConta($id)
@@ -35,7 +39,7 @@ class Contas
                 VALUES ('".$data["desc_conta"]."', '".$data["sigla_conta"]."', '".date('Y-m-d H:i:s')."', '".date('Y-m-d H:i:s')."')";
 
         if ($this->conn->query($sql)) {
-            return "Nova conta adicionada com sucesso";
+            return "Nova conta adicionada com sucesso.";
         } else {
             return "Error: " . $sql . "<br>" . $this->conn->error;
         }
@@ -46,7 +50,7 @@ class Contas
         $sql = "UPDATE Contas SET desc_conta='".$data["desc_conta"]."', sigla_conta='".$data["sigla_conta"]."', dt_updated='".date('Y-m-d H:i:s')."'
         WHERE conta_id=".$data["conta_id"]."";
         if ($this->conn->query($sql)) {
-            return "Conta atualizada com sucesso";
+            return "Conta atualizada com sucesso.";
         } else {
             return "Error: " . $sql . "<br>" . $this->conn->error;
         }
@@ -55,7 +59,10 @@ class Contas
     public function deleteConta($id)
     {
         $sql = "DELETE from Contas where conta_id = ".$id."";
-        $result = mysqli_query($this->conn, $query);
-        return $result->fetch_assoc();
+        if ($this->conn->query($sql)) {
+            return "Conta deletada.";
+        } else {
+            return "Error: " . $sql . "<br>" . $this->conn->error;
+        }
     }
 }

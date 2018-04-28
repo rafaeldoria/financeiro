@@ -22,7 +22,7 @@ class Usuarios
                 $i++;
             }
             return $ret;
-        }  else{
+        } else{
             return "Nenhum Usuário Encontrado.";
         }
     }

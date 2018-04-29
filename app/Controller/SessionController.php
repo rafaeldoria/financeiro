@@ -14,7 +14,8 @@ class SessionController
         $_SESSION["user_logged"]["usuario_id"] = $data["usuario_id"];
         $_SESSION["user_logged"]["login"] = $data["login"];
         $_SESSION["user_logged"]["nome_usuario"] = $data["nome_usuario"];
-        $_SESSION["user_logged"]["conta_id"] = $data["permissao"];
+        $_SESSION["user_logged"]["permissao"] = $data["permissao"];
+        $_SESSION["user_logged"]["conta_id"] = $data["conta_id"];
         $_SESSION["user_logged"]["logged"] = date('H:i:s');
     }
 

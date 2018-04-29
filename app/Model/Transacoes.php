@@ -13,11 +13,12 @@ class Transacoes
     public function allTransacoes()
     {
         $i = 0;
-        $query = "select t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, c.desc_conta from Transacoes t
+        $query = "SELECT t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, c.desc_conta from Transacoes t
         INNER JOIN Contas c ON c.conta_id = t.conta_id
-        INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel";
+        INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel
+        where t.conta_id = ".$_SESSION["user_logged"]["conta_id"]."";
         $result = mysqli_query($this->conn, $query);
-        if($result) {
+        if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $ret[$i] = $row;
                 $i++;
@@ -30,7 +31,7 @@ class Transacoes
 
     public function getTransacao($id)
     {
-        $query = "select t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.conta_id, c.desc_conta from Transacoes t
+        $query = "SELECT t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.conta_id, c.desc_conta from Transacoes t
         INNER JOIN Contas c ON c.conta_id = t.conta_id
         INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel
         INNER JOIN Usuarios us ON us.usuario_id = t.usuario_acao
@@ -97,19 +98,42 @@ class Transacoes
 
     public function getTransacoesUsuario()
     {
-        $query = "select t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.conta_id, c.desc_conta from Transacoes t
+        $query = "SELECT t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.conta_id, c.desc_conta from Transacoes t
         INNER JOIN Contas c ON c.conta_id = t.conta_id
         INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel
         INNER JOIN Usuarios us ON us.usuario_id = t.usuario_acao
         where t.usuario_responsavel = ".$_SESSION["user_logged"]["usuario_id"]."";
         $result = mysqli_query($this->conn, $query);
         $i = 0;
-        if($result) {
+        if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $ret[$i] = $row;
                 $i++;
             }
             return $ret;
+        } else{
+            return "Nenhuma Transação do Usuário.";
+        }
+    }
+
+    public function extratoConta($data)
+    {
+        $query = "SELECT t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.conta_id, c.desc_conta from Transacoes t
+        INNER JOIN Contas c ON c.conta_id = t.conta_id
+        INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel
+        INNER JOIN Usuarios us ON us.usuario_id = t.usuario_acao
+        where c.conta_id = ".$data["conta_id"]." AND
+        c.dt_created BETWEEN '".$data["data_inicial"]."' AND '".$data["data_final"]."'";
+        $result = mysqli_query($this->conn, $query);
+        $i = 0;
+        $total = 0;
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $ret[$i] = $row;
+                $total = $total + $row["valor"];
+                $i++;
+            }
+            return $data = array($ret, $total);
         } else{
             return "Nenhuma Transação do Usuário.";
         }

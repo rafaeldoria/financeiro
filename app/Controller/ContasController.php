@@ -16,7 +16,7 @@ class ContasController
     public function index()
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=3) {
+            if($_SESSION["user_logged"]["permissao"]<=3) {
                 return $this->contas->allContas();
             }else {
                 return "HomePage";
@@ -29,7 +29,7 @@ class ContasController
     public function show($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=3) {
+            if($_SESSION["user_logged"]["permissao"]<=3) {
                 return $this->contas->getConta($id);
             }else {
                 return "HomePage";
@@ -42,7 +42,7 @@ class ContasController
     public function store()
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=2) {
+            if($_SESSION["user_logged"]["permissao"]<=2) {
                 $conta = "Teste";
                 $sigla_conta = "tst";
                 $data = array(
@@ -61,7 +61,7 @@ class ContasController
     public function update($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=2) {
+            if($_SESSION["user_logged"]["permissao"]<=2) {
                 $conta = "Supervisor";
                 $sigla_conta = "sup";
                 $data = array(
@@ -81,7 +81,7 @@ class ContasController
     public function destroy($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=2) {
+        if($_SESSION["user_logged"]["permissao"]<=2) {
                 return $this->contas->deleteConta($id);
             }else {
                 return "HomePage";

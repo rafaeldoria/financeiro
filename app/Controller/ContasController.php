@@ -16,7 +16,11 @@ class ContasController
     public function index()
     {
         if($this->auth->verify_logged()) {
-            return $this->contas->allContas();
+            if($_SESSION["user_logged"]["conta_id"]<=3) {
+                return $this->contas->allContas();
+            }else {
+                return "HomePage";
+            }
         } else{
             return "Favor realizar login.";
         }
@@ -25,7 +29,11 @@ class ContasController
     public function show($id)
     {
         if($this->auth->verify_logged()) {
-            return $this->contas->getConta($id);
+            if($_SESSION["user_logged"]["conta_id"]<=3) {
+                return $this->contas->getConta($id);
+            }else {
+                return "HomePage";
+            }
         } else{
             return "Favor realizar login.";
         }
@@ -34,13 +42,17 @@ class ContasController
     public function store()
     {
         if($this->auth->verify_logged()) {
-            $conta = "Gerente";
-            $sigla_conta = "ger";
-            $data = array(
-                "desc_conta" => $conta,
-                "sigla_conta" => $sigla_conta
-            );
-            return $this->contas->addConta($data);
+            if($_SESSION["user_logged"]["conta_id"]<=2) {
+                $conta = "Teste";
+                $sigla_conta = "tst";
+                $data = array(
+                    "desc_conta" => $conta,
+                    "sigla_conta" => $sigla_conta
+                );
+                return $this->contas->addConta($data);
+            }else {
+                return "HomePage";
+            }
         } else{
             return "Favor realizar login.";
         }
@@ -49,14 +61,18 @@ class ContasController
     public function update($id)
     {
         if($this->auth->verify_logged()) {
-            $conta = "Supervisor";
-            $sigla_conta = "sup";
-            $data = array(
-                "desc_conta" => $conta,
-                "sigla_conta" => $sigla_conta,
-                "conta_id" => $id,
-            );
-            return $this->contas->updateConta($data);
+            if($_SESSION["user_logged"]["conta_id"]<=2) {
+                $conta = "Supervisor";
+                $sigla_conta = "sup";
+                $data = array(
+                    "desc_conta" => $conta,
+                    "sigla_conta" => $sigla_conta,
+                    "conta_id" => $id,
+                );
+                return $this->contas->updateConta($data);
+            }else {
+                return "HomePage";
+            }
         } else{
             return "Favor realizar login.";
         }
@@ -65,11 +81,13 @@ class ContasController
     public function destroy($id)
     {
         if($this->auth->verify_logged()) {
-            return $this->contas->deleteConta($id);
+            if($_SESSION["user_logged"]["conta_id"]<=2) {
+                return $this->contas->deleteConta($id);
+            }else {
+                return "HomePage";
+            }
         } else{
             return "Favor realizar login.";
         }
     }
 }
-$obj = new ContasController();
-var_dump($obj->destroy(1));

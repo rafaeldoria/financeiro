@@ -72,7 +72,9 @@ class Usuarios
 
     public function auth($data)
     {
-        $query = "SELECT * from Usuarios where login = '".$data["login"]."'";
+        $query = "SELECT u.usuario_id, u.login, u.senha, u.nome_usuario, c.permissao from Usuarios u
+        INNER JOIN Contas c ON u.conta_id = c.conta_id
+        where login = '".$data["login"]."'";
         $result = mysqli_query($this->conn, $query);
         if($result) {
             $user = $result->fetch_assoc();

@@ -17,7 +17,7 @@ class Transacoes
         INNER JOIN Contas c ON c.conta_id = t.conta_id
         INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel";
         $result = mysqli_query($this->conn, $query);
-        if($result->num_rows > 0) {
+        if($result) {
             while($row = $result->fetch_assoc()) {
                 $ret[$i] = $row;
                 $i++;
@@ -30,7 +30,7 @@ class Transacoes
 
     public function getTransacao($id)
     {
-        $query = "select t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.desc_conta from Transacoes t
+        $query = "select t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.conta_id, c.desc_conta from Transacoes t
         INNER JOIN Contas c ON c.conta_id = t.conta_id
         INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel
         INNER JOIN Usuarios us ON us.usuario_id = t.usuario_acao
@@ -92,6 +92,26 @@ class Transacoes
             return "Data Prevista da Transacão atualizada com sucesso.";
         } else {
             return "Error: " . $sql . "<br>" . $this->conn->error;
+        }
+    }
+
+    public function getTransacoesUsuario()
+    {
+        $query = "select t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, us.login, c.conta_id, c.desc_conta from Transacoes t
+        INNER JOIN Contas c ON c.conta_id = t.conta_id
+        INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel
+        INNER JOIN Usuarios us ON us.usuario_id = t.usuario_acao
+        where t.usuario_responsavel = ".$_SESSION["user_logged"]["usuario_id"]."";
+        $result = mysqli_query($this->conn, $query);
+        $i = 0;
+        if($result) {
+            while($row = $result->fetch_assoc()) {
+                $ret[$i] = $row;
+                $i++;
+            }
+            return $ret;
+        } else{
+            return "Nenhuma Transação do Usuário.";
         }
     }
 }

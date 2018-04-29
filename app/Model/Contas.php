@@ -13,9 +13,9 @@ class Contas
     public function allContas()
     {
         $i = 0;
-        $query = "select * from Contas";
+        $query = "SELECT * from Contas";
         $result = mysqli_query($this->conn, $query);
-        if($result->num_rows > 0) {
+        if($result) {
             while($row = $result->fetch_assoc()) {
                 $ret[$i] = $row;
                 $i++;
@@ -28,7 +28,7 @@ class Contas
 
     public function getConta($id)
     {
-        $query = "select * from Contas where conta_id = ".$id."";
+        $query = "SELECT * from Contas where conta_id = ".$id."";
         $result = mysqli_query($this->conn, $query);
         return $result->fetch_assoc();
     }

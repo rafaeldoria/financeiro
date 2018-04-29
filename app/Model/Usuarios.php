@@ -16,7 +16,7 @@ class Usuarios
         $query = "SELECT u.login, u.nome_usuario, u.permissao, c.desc_conta from Usuarios u
         INNER JOIN Contas c ON c.conta_id = u.conta_id";
         $result = mysqli_query($this->conn, $query);
-        if($result) {
+        if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $ret[$i] = $row;
                 $i++;
@@ -76,7 +76,7 @@ class Usuarios
         INNER JOIN Contas c ON u.conta_id = c.conta_id
         WHERE login = '".$data["login"]."'";
         $result = mysqli_query($this->conn, $query);
-        if($result) {
+        if($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             if(base64_decode($user["senha"])==$data["senha"]) {
                 return $user;
@@ -106,7 +106,7 @@ class Usuarios
         INNER JOIN Contas c ON c.conta_id = u.conta_id
         WHERE c.conta_id = ".$_SESSION["user_logged"]["conta_id"]."";
         $result = mysqli_query($this->conn, $query);
-        if($result) {
+        if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $ret[$i] = $row;
                 $i++;

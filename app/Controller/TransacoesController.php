@@ -147,6 +147,24 @@ class TransacoesController
         }
     }
 
+    public function extrato()
+    {
+        if($this->auth->verify_logged()) {
+            if($_SESSION["user_logged"]["permissao"]<=2) {
+                $data = array(
+                    "conta_id" => "1",
+                    "data_inicial" => date('Y-m-d', strtotime("-10 day")),
+                    "data_final" => date('Y-m-d', strtotime("+1 day")),
+                );
+                return $this->transacoes->extratoConta($data);
+            }else {
+                return "HomePage";
+            }
+        } else{
+            return "Favor realizar login.";
+        }
+    }
+
 }
 $obj = new TransacoesController();
-var_dump($obj->show(3));
+var_dump($obj->extrato());

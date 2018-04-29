@@ -16,7 +16,7 @@ class TransacoesController
     public function index()
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=3) {
+            if($_SESSION["user_logged"]["permissao"]<=3) {
                 return $this->transacoes->allTransacoes();
             }else {
                 return "HomePage";
@@ -30,7 +30,7 @@ class TransacoesController
     {
         if($this->auth->verify_logged()) {
             $transacao = $this->transacoes->getTransacao($id);
-            if($_SESSION["user_logged"]["conta_id"] <= $transacao["conta_id"]) {
+            if($_SESSION["user_logged"]["conta_id"] == $transacao["conta_id"]) {
                 return $transacao;
             }else {
                 return "HomePage";
@@ -64,7 +64,7 @@ class TransacoesController
     public function update($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=3) {
+            if($_SESSION["user_logged"]["permissao"]<=3) {
                 $transacao = "Depósito caixa.";
                 $previsao = date('Y-m-d');
                 $valor = 2800.00;
@@ -88,7 +88,7 @@ class TransacoesController
     public function destroy($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=2) {
+            if($_SESSION["user_logged"]["permissao"]<=2) {
                 return $this->transacoes->deleteTransacao($id);
             }else {
                 return "HomePage";
@@ -101,7 +101,7 @@ class TransacoesController
     public function alterarStatusTransacao($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=4) {
+            if($_SESSION["user_logged"]["permissao"]<=4) {
                 $status = "F";
                 $usuario = $_SESSION["user_logged"]["usuario_id"];
                 $data = array(
@@ -121,7 +121,7 @@ class TransacoesController
     public function alterarPrevisaoTransacao($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=4) {
+            if($_SESSION["user_logged"]["permissao"]<=4) {
                 $previsao = date('Y-m-d', strtotime('+15 day'));
                 $usuario = $_SESSION["user_logged"]["usuario_id"];
                 $data = array(
@@ -148,3 +148,5 @@ class TransacoesController
     }
 
 }
+$obj = new TransacoesController();
+var_dump($obj->show(3));

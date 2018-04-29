@@ -50,15 +50,17 @@ class AuthController
         $login = "NewTest";
         $senha = "456789";
         $nome = "Tester";
+        $conta = "1";
         $data = array(
             "login" => $login,
             "senha" => base64_encode($senha),
-            "nome_usuario" => $nome
+            "nome_usuario" => $nome,
+            "conta_id" => $conta,
         );
         return $this->usuarios->novoUsuario($data);
     }
 }
 // $obj = new AuthController;
 // var_dump($obj->registrarUsuario());
-// var_dump($obj->logoff());
+// var_dump($obj->auth());
 // $obj->verify_logged();

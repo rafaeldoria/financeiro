@@ -15,7 +15,8 @@ class Transacoes
         $i = 0;
         $query = "select t.desc_transacao, t.dt_realizado, t.dt_previsto, t.valor, t.status, u.login, c.desc_conta from Transacoes t
         INNER JOIN Contas c ON c.conta_id = t.conta_id
-        INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel";
+        INNER JOIN Usuarios u ON u.usuario_id = t.usuario_responsavel
+        where t.conta_id = ".$_SESSION["user_logged"]["conta_id"]."";
         $result = mysqli_query($this->conn, $query);
         if($result) {
             while($row = $result->fetch_assoc()) {

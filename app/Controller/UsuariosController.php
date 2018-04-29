@@ -16,7 +16,7 @@ class UsuariosController
     public function index()
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=4) {
+            if($_SESSION["user_logged"]["permissao"]<=1) {
                 return $this->usuarios->allUsuarios();
             }else {
                 return "HomePage";
@@ -29,7 +29,7 @@ class UsuariosController
     public function show($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=4) {
+            if($_SESSION["user_logged"]["permissao"]<=4) {
                 return $this->usuarios->getUsuario($id);
             }else {
                 return "HomePage";
@@ -42,16 +42,18 @@ class UsuariosController
     public function store()
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=4) {
+            if($_SESSION["user_logged"]["permissao"]<=4) {
                 $login = "teste";
                 $senha = "admin";
                 $nome = "teste";
-                $conta = 2;
+                $conta = 1;
+                $permissao = 5;
                 $data = array(
                     "login" => $login,
                     "senha" => base64_encode($senha),
                     "nome_usuario" => $nome,
-                    "conta_id" => $conta
+                    "conta_id" => $conta,
+                    "permissao" => $permissao,
                 );
                 return $this->usuarios->addUsuario($data);
             }else {
@@ -65,14 +67,16 @@ class UsuariosController
     public function update($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=3) {
+            if($_SESSION["user_logged"]["permissao"]<=3) {
                 $login = "admin";
                 $nome = "Administrador";
                 $conta = 1;
+                $permissao = 4;
                 $data = array(
                     "login" => $login,
                     "nome_usuario" => $nome,
                     "conta_id" => $conta,
+                    "permissao" => $permissao,
                     "usuario_id" => $id
                 );
                 return $this->usuarios->updateUsuario($data);
@@ -87,7 +91,7 @@ class UsuariosController
     public function destroy($id)
     {
         if($this->auth->verify_logged()) {
-            if($_SESSION["user_logged"]["conta_id"]<=3) {
+            if($_SESSION["user_logged"]["permissao"]<=3) {
                 return $this->usuarios->deleteUsuario($id);
             }else {
                 return "HomePage";
@@ -96,4 +100,20 @@ class UsuariosController
             return "Favor realizar login.";
         }
     }
+
+    public function getUsuariosConta()
+    {
+        if($this->auth->verify_logged()) {
+            if($_SESSION["user_logged"]["permissao"]<=3) {
+                return $this->usuarios->getUsuariosConta();
+            }else {
+                return "HomePage";
+            }
+        } else{
+            return "Favor realizar login.";
+        }
+    }
 }
+
+$obj = new UsuariosController();
+var_dump($obj->getUsuariosConta());

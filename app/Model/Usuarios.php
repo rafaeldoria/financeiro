@@ -79,10 +79,10 @@ class Usuarios
             if(base64_decode($user["senha"])==$data["senha"]) {
                 return $user;
             }else {
-                return "Usuário ou senha incorretos.";
+                return false;
             }
         } else{
-            return "Usuário ou senha incorretos.";
+            return false;
         }
     }
 }

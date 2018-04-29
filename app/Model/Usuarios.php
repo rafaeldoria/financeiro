@@ -87,4 +87,15 @@ class Usuarios
             return false;
         }
     }
+
+    public function novoUsuario($data)
+    {
+        $query = "INSERT INTO Usuarios (login, senha, nome_usuario, conta_id, dt_created, dt_updated)
+                VALUES ('".$data["login"]."', '".$data["senha"]."', '".$data["nome_usuario"]."', '5', '".date('Y-m-d H:i:s')."', '".date('Y-m-d H:i:s')."')";
+        if ($this->conn->query($query)) {
+            return "Novo usuário cadastrado com sucesso.";
+        } else {
+            return "Error: " . $query . "<br>" . $this->conn->error;
+        }
+    }
 }

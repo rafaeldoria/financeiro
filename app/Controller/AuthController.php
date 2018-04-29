@@ -44,8 +44,21 @@ class AuthController
             return false;
         }
     }
+
+    public function registrarUsuario()
+    {
+        $login = "NewTest";
+        $senha = "456789";
+        $nome = "Tester";
+        $data = array(
+            "login" => $login,
+            "senha" => base64_encode($senha),
+            "nome_usuario" => $nome
+        );
+        return $this->usuarios->novoUsuario($data);
+    }
 }
 // $obj = new AuthController;
-// var_dump($obj->auth());
+// var_dump($obj->registrarUsuario());
 // var_dump($obj->logoff());
 // $obj->verify_logged();

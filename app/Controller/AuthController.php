@@ -5,10 +5,12 @@ require_once 'SessionController.php';
 class AuthController
 {
     private $usuarios;
+    private $session;
 
     function __construct()
     {
         $this->usuarios = new Usuarios();
+        $this->session = new SessionController();
     }
 
     public function auth()
@@ -21,13 +23,29 @@ class AuthController
         );
         $user = $this->usuarios->auth($data);
         if($user){
-            $session = new SessionController();
-            $session->record($user);
+            $this->session->record($user);
             return $user;
         } else{
             return "Usuário ou senha incorretos.";
         }
     }
+
+    public function logoff()
+    {
+        $this->session->logoff();
+        return "Logoff realizado.";
+    }
+
+    public function verify_logged()
+    {
+        if(isset($_SESSION["user_logged"])) {
+            return true;
+        } else{
+            return false;
+        }
+    }
 }
-$obj = new AuthController;
-$obj->auth();
+// $obj = new AuthController;
+// var_dump($obj->auth());
+// var_dump($obj->logoff());
+// $obj->verify_logged();

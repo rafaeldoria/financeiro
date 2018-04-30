@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- <?php define(PATH, 'http://localhost/projeto_transacoes/'); ?>
+    <?php echo PATH;?> -->
     <title>Hot Milhas Gerenciamento Financeiro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+    <link href="http://localhost/projeto_transacoes/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/projeto_transacoes/assets/css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -20,4 +23,3 @@
                 </div>
             </div>
         </div>
-    </div>

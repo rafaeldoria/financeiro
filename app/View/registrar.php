@@ -12,11 +12,16 @@
                             <input class="form-control" type="password" placeholder="Password">
                             <input class="form-control" type="password" placeholder="Confirm Password">
                             <input class="form-control" type="text" placeholder="Nome">
-                            <select class="form-control selectpicker">
-                                <option>Financeiro</option>
-                                <option>Recursos Humanos</option>
-                                <option>Administrativo</option>
-                            </select>
+                            <label class="col-md-4 control-label" for="select-1"><h4>Conta</h4></label>
+                            <div class="form-group">
+                                <div class="col-md-8" style="padding:0px;">
+                                    <select class="form-control selectpicker">
+                                        <option>Financeiro</option>
+                                        <option>Recursos Humanos</option>
+                                        <option>Administrativo</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="action">
                                 <a class="btn btn-primary signup" type="submit">Confirmar</a>
                             </div>

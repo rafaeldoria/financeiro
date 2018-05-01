@@ -13,20 +13,20 @@ class AuthController
         $this->session = new SessionController();
     }
 
-    public function auth()
+    public function auth($data)
     {
-        $login = "admin";
-        $senha = "admin";
+        $login = $data["login"];
+        $senha = $data["senha"];
         $data = array(
             "login" => $login,
             "senha" => $senha,
         );
         $user = $this->usuarios->auth($data);
-        if($user){
+        if($user) {
             $this->session->record($user);
-            return $user;
-        } else{
-            return "Usuário ou senha incorretos.";
+            echo 1;
+        }else {
+            echo 0;
         }
     }
 
@@ -45,22 +45,37 @@ class AuthController
         }
     }
 
-    public function registrarUsuario()
+    public function registrarUsuario($data)
     {
-        $login = "NewTest";
-        $senha = "456789";
-        $nome = "Tester";
-        $conta = "1";
+        $login = $data["login"];
+        $senha = $data["senha"];
+        $nome = $data["nome"];
+        $conta = $data["conta"];
         $data = array(
             "login" => $login,
             "senha" => base64_encode($senha),
             "nome_usuario" => $nome,
             "conta_id" => $conta,
         );
-        return $this->usuarios->novoUsuario($data);
+        if($this->usuarios->novoUsuario($data)) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }
-// $obj = new AuthController;
-// var_dump($obj->registrarUsuario());
-// var_dump($obj->auth());
-// $obj->verify_logged();
+$obj = new AuthController;
+$action = $_POST["action"];
+switch ($action) {
+    case 'R':
+        $obj->registrarUsuario($_POST);
+        break;
+
+    case 'L':
+        $obj->auth($_POST);
+        break;
+
+    default:
+        // code...
+        break;
+}

@@ -7,10 +7,10 @@
             <div class="box">
                 <div class="content-wrap">
                     <h6>Logar</h6>
-                    <input class="form-control" type="text" placeholder="Usuário">
-                    <input class="form-control" type="password" placeholder="Senha">
+                    <input id="usuario" class="form-control" type="text" placeholder="Usuário">
+                    <input id="senha" class="form-control" type="password" placeholder="Senha">
                     <div class="action">
-                        <a class="btn btn-primary signup" href="index.php">Login</a>
+                        <a class="btn btn-primary signup" id="logar">Login</a>
                     </div>
                 </div>
             </div>
@@ -22,4 +22,5 @@
         </div>
     </div>
 </div>
+
 <?php include 'Layout/footer.php';?>

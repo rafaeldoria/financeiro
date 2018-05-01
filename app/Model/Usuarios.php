@@ -78,7 +78,8 @@ class Usuarios
         $result = mysqli_query($this->conn, $query);
         if($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            if(base64_decode($user["senha"])==$data["senha"]) {
+            $senha = base64_decode($user["senha"]);
+            if($senha == $data["senha"]) {
                 return $user;
             }else {
                 return false;
@@ -90,10 +91,11 @@ class Usuarios
 
     public function novoUsuario($data)
     {
-        $query = "INSERT INTO Usuarios (login, senha, nome_usuario, conta_id, 'permissao', dt_created, dt_updated)
+        var_dump($data);
+        $query = "INSERT INTO Usuarios (login, senha, nome_usuario, conta_id, permissao, dt_created, dt_updated)
                 VALUES ('".$data["login"]."', '".$data["senha"]."', '".$data["nome_usuario"]."', '".$data["conta_id"]."', '5', '".date('Y-m-d H:i:s')."', '".date('Y-m-d H:i:s')."')";
         if ($this->conn->query($query)) {
-            return "Novo usuário cadastrado com sucesso.";
+            return true;
         } else {
             return "Error: " . $query . "<br>" . $this->conn->error;
         }

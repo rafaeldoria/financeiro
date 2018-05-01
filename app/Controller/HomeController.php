@@ -1,8 +1,7 @@
 <?php
 
-class AuthController
+class HomeController
 {
-
 
     function __construct()
     {
@@ -11,8 +10,10 @@ class AuthController
 
     public function index()
     {
-        header("Location: http://localhost/projeto_transacoes/app/View/login.php");
+        if($this->auth->verify_logged()) {
+            header("Location: ".ROOT."/app/View/index_transacoes.php");
+        }else {
+            header("Location: ".ROOT."/app/View/login.php");
+        }
     }
 }
-$obj = new AuthController();
-$obj->index();

@@ -1,4 +1,10 @@
-<?php include_once '../Layout/logo.php';?>
+<?php include_once '../Layout/logo.php';
+    // require_once '../../../config/connectDB.php';
+    include_once '../../Model/Contas.php';
+
+    $conta = new Contas();
+    $contas = $conta->allContas();
+?>
 
 <div class="page-content container">
     <div class="row">
@@ -22,16 +28,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Financeiro</td>
-                                <td>Fin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal_contas">Detalhes</button>
-                                    <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal_contas">Editar</button>
-                                    <button class="btn btn-danger btn-xs">Deletar</button>
-                                </td>
-                            </tr>
+                            <?php foreach ($contas as $key => $conta): ?>
+                                <tr>
+                                    <td><?php echo $conta["conta_id"]?></td>
+                                    <td><?php echo $conta["desc_conta"]?></td>
+                                    <td><?php echo $conta["sigla_conta"]?></td>
+                                    <td>
+                                        <button class="btn btn-success btn-xs"  data-toggle="modal" data-target="#modal_usuarios">Detalhes</button>
+                                        <button class="btn btn-info btn-xs"  data-toggle="modal" data-target="#modal_usuarios">Editar</button>
+                                        <button class="btn btn-danger btn-xs">Deletar</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

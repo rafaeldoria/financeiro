@@ -65,17 +65,19 @@ class AuthController
     }
 }
 $obj = new AuthController;
-$action = $_POST["action"];
-switch ($action) {
-    case 'R':
+if($_POST){
+    $action = $_POST["action"];
+    switch ($action) {
+        case 'R':
         $obj->registrarUsuario($_POST);
         break;
 
-    case 'L':
+        case 'L':
         $obj->auth($_POST);
         break;
 
-    default:
+        default:
         // code...
         break;
+    }
 }

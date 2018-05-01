@@ -37,7 +37,7 @@ $(document).ready(function(){
             url: "http://localhost/projeto_transacoes/app/Controller/AuthController.php",
             success: function(retorno){
                 if(retorno == 1){
-                    alert("Login Realizado!");
+                    window.location = "http://localhost/projeto_transacoes/app/Controller/TransacoesController.php";
                 }else {
                     alert("Usuário ou senha incorretos.");
                     $("#usuario").val("");

@@ -1,4 +1,4 @@
-<?php include 'Layout/header.php';?>
+<?php include 'Layout/logo.php';?>
 
 <div class="page-content container">
     <div class="row">

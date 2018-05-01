@@ -5,11 +5,10 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="content-box-large">
                 <div class="panel-heading">
-                    <div class="panel-title">Usuários</div>
+                    <div class="panel-title milhas"><h3>Usuários</h3></div>
 
                     <div class="panel-options">
-                        <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                        <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i>Adicionar Usuário</a>
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_usuarios">Adicionar Conta</button>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -32,9 +31,9 @@
                                 <td>Financeiro</td>
                                 <td>5</td>
                                 <td>
-                                    <button class="btn btn-info btn-xs">Info</button>
-                                    <button class="btn btn-warning btn-xs">Warning</button>
-                                    <button class="btn btn-danger btn-xs">Danger</button>
+                                    <button class="btn btn-success btn-xs"  data-toggle="modal" data-target="#modal_usuarios">Detalhes</button>
+                                    <button class="btn btn-info btn-xs"  data-toggle="modal" data-target="#modal_usuarios">Editar</button>
+                                    <button class="btn btn-danger btn-xs">Deletar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -46,4 +45,5 @@
 </div>
 </div>
 
+<?php include 'modal_usuarios.php'?>
 <?php include '../Layout/footer.php';?>

@@ -10,17 +10,17 @@ Launch demo modal
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal_title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h4 class="modal-title hot" id="modal_title">CRUD</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-25px">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="content-box-large">
                             <div class="panel-heading">
-                                <div class="panel-title"><h2>Contas</h2></div>
+                                <div class="panel-title milhas"><h2>Contas</h2></div>
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal" role="form">

@@ -5,11 +5,10 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="content-box-large">
                 <div class="panel-heading">
-                    <div class="panel-title">Contas</div>
+                    <div class="panel-title milhas"><h3>Contas</h3></div>
 
                     <div class="panel-options">
-                        <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-                        <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i>Adicionar Conta</a>
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_contas">Adicionar Conta</button>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -28,9 +27,9 @@
                                 <td>Financeiro</td>
                                 <td>Fin</td>
                                 <td>
-                                    <button class="btn btn-info btn-xs">Info</button>
-                                    <button class="btn btn-warning btn-xs">Warning</button>
-                                    <button class="btn btn-danger btn-xs">Danger</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal_contas">Detalhes</button>
+                                    <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal_contas">Editar</button>
+                                    <button class="btn btn-danger btn-xs">Deletar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -41,5 +40,5 @@
     </div>
 </div>
 </div>
-
+<?php include 'modal_contas.php';?>
 <?php include '../Layout/footer.php';?>

@@ -1,5 +1,9 @@
 <?php
-require_once '../../config/connectDB.php';
+if(isset($_SESSION) && $_SESSION["sistema"]){
+    require_once '../../config/connectDB.php';
+}else {
+    require_once 'config/connectDB.php';
+}
 
 class Usuarios
 {

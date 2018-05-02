@@ -1,5 +1,7 @@
 <?php
-require_once '../Model/Usuarios.php';
+// if(isset($_SESSION) && $_SESSION["sistema"]){
+//     include_once '../Model/Usuarios.php';
+// }
 require_once 'SessionController.php';
 
 class AuthController
@@ -9,12 +11,17 @@ class AuthController
 
     function __construct()
     {
-        $this->usuarios = new Usuarios();
         $this->session = new SessionController();
+        if(!isset($_SESSION)){
+            session_start();
+            $_SESSION["sistema"] = true;
+        }
     }
 
     public function auth($data)
     {
+        include_once '../Model/Usuarios.php';
+        $this->usuarios = new Usuarios();
         $login = $data["login"];
         $senha = $data["senha"];
         $data = array(
@@ -47,6 +54,8 @@ class AuthController
 
     public function registrarUsuario($data)
     {
+        include_once '../Model/Usuarios.php';
+        $this->usuarios = new Usuarios();
         $login = $data["login"];
         $senha = $data["senha"];
         $nome = $data["nome"];
@@ -58,26 +67,28 @@ class AuthController
             "conta_id" => $conta,
         );
         if($this->usuarios->novoUsuario($data)) {
+            $_SESSION["index"] = true;
             return true;
         }else {
             return false;
         }
     }
 }
-$obj = new AuthController;
-if($_POST){
-    $action = $_POST["action"];
-    switch ($action) {
-        case 'R':
-        $obj->registrarUsuario($_POST);
-        break;
-
-        case 'L':
-        $obj->auth($_POST);
-        break;
-
-        default:
-        // code...
-        break;
-    }
-}
+// $obj = new AuthController;
+// var_dump($obj->logoff());
+// if($_POST){
+//     $action = $_POST["action"];
+//     switch ($action) {
+//         case 'R':
+//         $obj->registrarUsuario($_POST);
+//         break;
+//
+//         case 'L':
+//         $obj->auth($_POST);
+//         break;
+//
+//         default:
+//         // code...
+//         break;
+//     }
+// }

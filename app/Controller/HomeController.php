@@ -1,11 +1,11 @@
 <?php
-
+require_once 'AuthController.php';
 class HomeController
 {
 
     function __construct()
     {
-
+        $this->auth = new AuthController();
     }
 
     public function index()
@@ -16,4 +16,5 @@ class HomeController
             header("Location: ".ROOT."/app/View/login.php");
         }
     }
+
 }

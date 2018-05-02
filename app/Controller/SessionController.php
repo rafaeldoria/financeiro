@@ -10,7 +10,7 @@ class SessionController
     public function record($data)
     {
         session_cache_expire(30);
-        session_start();
+        
         $_SESSION["user_logged"]["usuario_id"] = $data["usuario_id"];
         $_SESSION["user_logged"]["login"] = $data["login"];
         $_SESSION["user_logged"]["nome_usuario"] = $data["nome_usuario"];

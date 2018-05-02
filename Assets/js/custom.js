@@ -29,15 +29,16 @@ $(document).ready(function(){
         $data = {
             login: login,
             senha: senha,
-            action: "L"
+            cont: "Auth",
+            action: "login"
         }
         $.ajax({
             type: 'post',
             data: $data,
-            url: "http://localhost/projeto_transacoes/app/Controller/AuthController.php",
+            url: "http://localhost/projeto_transacoes/app/Routes/routes.php",
             success: function(retorno){
                 if(retorno == 1){
-                    window.location = "http://localhost/projeto_transacoes/app/Controller/TransacoesController.php";
+                    window.location = "http://localhost/projeto_transacoes/app/View/Transacoes/index_transacoes.php";
                 }else {
                     alert("Usuário ou senha incorretos.");
                     $("#usuario").val("");
@@ -69,16 +70,17 @@ $(document).ready(function(){
             senha: $("#senha").val(),
             nome: $("#nome").val(),
             conta: $("#conta").val(),
-            action: "R"
+            cont: "Auth",
+            action: "registrar"
         }
         $.ajax({
             type: 'post',
             data: $data,
-            url: "http://localhost/projeto_transacoes/app/Controller/AuthController.php",
+            url: "http://localhost/projeto_transacoes/app/Routes/routes.php",
             success: function(retorno){
                 if(retorno) {
                     alert("Cadastro realizado com sucesso");
-                    window.location = "http://localhost/projeto_transacoes/app/Controller/HomeController.php";
+                    window.location = "http://localhost/projeto_transacoes/app/View/login.php";
                 }else {
                     alert("Erro ao cadastrar novo usuário");
                 }

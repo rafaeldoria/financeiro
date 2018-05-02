@@ -1,4 +1,10 @@
-<?php include_once '../Layout/logo.php';?>
+<?php
+include_once '../Layout/logo.php';
+include_once '../../Controller/TransacoesController.php';
+$obj = new TransacaoController();
+$transacoes = $obj->transacaoesUsuario();
+
+?>
 
 <div class="page-content container">
     <div class="row">
@@ -28,23 +34,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>1500</td>
-                                <td>15/10/2015</td>
-                                <td>F</td>
-                                <td>15/10/2015</td>
-                                <td>RH</td>
-                                <td>1</td>
-                                <td>5</td>
-                                <td>
-                                    <?php $teste = "e"; ?>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal_transacoes">Detalhes</button>
-                                    <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal_transacoes">Editar</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal">Deletar</button>
-                                </td>
-                            </tr>
+                            <?php foreach ($transacoes as $key => $value): ?>
+                                <tr>
+                                    <td><?php echo $value["id"];?></td>
+                                    <td><?php echo $value["desc_transacao"];?></td>
+                                    <td><?php echo $value["desc_transacao"];?></td>
+                                    <td><?php echo $value["dt_realizado"];?></td>
+                                    <td><?php echo $value["dt_previsto"];?></td>
+                                    <td><?php echo $value["valor"];?></td>
+                                    <td><?php echo $value["status"];?></td>
+                                    <td><?php echo $value["usuario_resposavel"];?></td>
+                                    <td><?php echo $value["usuario_acao"];?></td>
+                                    <td><?php echo $value["desc_conta"];?></td>
+                                    <td>
+                                        <?php $teste = "e"; ?>
+                                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal_transacoes">Detalhes</button>
+                                        <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal_transacoes">Editar</button>
+                                        <button class="btn btn-danger btn-xs" data-toggle="modal">Deletar</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

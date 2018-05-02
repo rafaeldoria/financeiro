@@ -5,12 +5,12 @@ class SessionController
 
     function __construct()
     {
-        session_start();
-        session_cache_expire(30);
     }
 
     public function record($data)
     {
+        session_cache_expire(30);
+        
         $_SESSION["user_logged"]["usuario_id"] = $data["usuario_id"];
         $_SESSION["user_logged"]["login"] = $data["login"];
         $_SESSION["user_logged"]["nome_usuario"] = $data["nome_usuario"];

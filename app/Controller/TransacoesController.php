@@ -141,7 +141,8 @@ class TransacoesController
     public function transacaoesUsuario()
     {
         if($this->auth->verify_logged()) {
-            return $this->transacoes->getTransacoesUsuario();
+            $transacoes = $this->transacoes->getTransacoesUsuario();
+            header("Location: ".ROOT."/app/View/index_transacoes.php");
         } else{
             return "Favor realizar login.";
         }
@@ -167,4 +168,4 @@ class TransacoesController
 
 }
 $obj = new TransacoesController();
-var_dump($obj->extrato());
+$obj->index();
